@@ -6,11 +6,14 @@ const username = config.db.user;
 const password = config.db.password;
 const host = config.db.host;
 
-console.log(database,username, password, host);
-
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: 'postgres',
+  dialect: 'mssql',
+  dialectOptions: {
+    options: {
+      trustServerCertificate: true // Necesario para conexiones locales
+    }
+  },
   timezone: '-03:00',
   logging: false
 });

@@ -5,6 +5,7 @@ import handlebars from "express-handlebars";
 import cors from 'cors';
 import __dirname from "../../utils.js";
 import { addLogger } from "../../middlewares/logger.middleware.js";
+import { sequelize } from '../db/sequelize.config.js';
 
 export default function configureExpress(app) {
   app.use(cors());
@@ -45,8 +46,9 @@ export default function configureExpress(app) {
     req.logger.fatal('Test - FATAL')
     res.send({ status: 200, message: 'Logger test' })
   })
-  
+
   //routes here, before *
+
 
   app.get('*', (req, res) => {
     req.logger.error('error 404 - HTTP')

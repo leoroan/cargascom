@@ -12,20 +12,15 @@ configureExpress(app);
 const connectWithRetry = () => {
   return sequelize.authenticate()
     .then(() => {
-      devLogger.info('Connection success');
-      // return sequelize.sync({ force: true, alter: true });
-      return sequelize.sync();
-    })
-    .then(() => {
-      devLogger.info('Sync models ', sequelize.models, ' done connection');
+      devLogger.info('Conectado a la base de datos');
+    }).then(() => {
       app.listen(SERVER_PORT, () => {
         devLogger.info(`Server listen at ${SERVER_PORT}`);
-        // checkConnection; // nodemailer
       });
     })
     .catch((error) => {
-      devLogger.error('Connection failed', error);
-      devLogger.warning('Retrying in 60 seconds... <maybe db down?>');
+      devLogger.error('No se pudo conectar a la base de datos:', error);
+      devLogger.warning('re intentando en 60 segundos... <maybe db down?>');
       return new Promise((resolve) => {
         setTimeout(resolve, 60000);
       }).then(() => connectWithRetry());

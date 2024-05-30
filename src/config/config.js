@@ -10,7 +10,7 @@ const program = new Command();
 // Definir opciones del programa
 program
   .option('-d, --debug', 'Activar modo debug', false)
-  .option('-p, --port <port>', 'Puerto del servidor', process.env.PORT || 8080)
+  .option('-p, --port <port>', 'Puerto del servidor', process.env.DB_PORT || 8080)
   .option('--mode <mode>', 'Modo de trabajo', 'dev')
   .requiredOption('-u, --user <user>', 'Usuario que utilizará la aplicación', 'No se ha declarado un usuario.');
 
