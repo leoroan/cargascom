@@ -52,6 +52,9 @@ export default class CustomRouter {
 
   // Policies for public, premium, admin
   handlePolicies = (policies) => (req, res, next) => {
+    //Validar si tiene acceso publico:
+    if (policies[0] === "PUBLIC") return next();
+
     // Verificar si el usuario es público o administrador
     const userRole = req.headers.user_role; // Suponiendo que el rol del usuario se envía en los encabezados como user_role
 
